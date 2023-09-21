@@ -1,6 +1,4 @@
-import http from "http"
-import fs from "fs"
-import path from "path"
+import {http} from "http"
 import { getNote, getNotes, createNote, deleteNote } from "./database.js"
 
 
