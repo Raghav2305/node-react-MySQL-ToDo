@@ -1,4 +1,4 @@
-import {http} from "http"
+import http from "http"
 import { getNote, getNotes, createNote, deleteNote } from "./database.js"
 
 
