@@ -4,7 +4,7 @@ import { getNote, getNotes, createNote, deleteNote } from "./database.js"
 
 const server = http.createServer(async (req, res) => {
 
-    const allowedOrigins = ["http://localhost:3000"]; // Replace with your React app's URL
+    const allowedOrigins = ["https://mern-to-do-frontend.onrender.com/"]; // Replace with your React app's URL
 
   // Check if the request origin is in the allowed list
     const origin = req.headers.origin;
@@ -38,7 +38,7 @@ const server = http.createServer(async (req, res) => {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(response)); 
 
-        } catch{
+        } catch(error){
             console.error("Error:", error);
             res.statusCode = 500; // Set an appropriate status code for the error
             res.end("Cannot get all notes");

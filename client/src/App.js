@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Components/Table";
-import axios from "axios";
 import Delete from "./Components/Delete"
 
 export default function APP() {
@@ -13,7 +12,7 @@ export default function APP() {
     const queryParams =`?title=${formData.title}&contents=${formData.contents}`;
     
 
-    fetch(`http://localhost:8080/notes/create${queryParams}`, {
+    fetch(`https://mern-to-do-backend.onrender.com/notes/create${queryParams}`, {
       method: "POST", 
     })
     .then((response) => {
@@ -37,7 +36,7 @@ export default function APP() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/")
+    fetch("https://mern-to-do-backend.onrender.com/")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

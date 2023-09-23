@@ -6,7 +6,7 @@ export default function Delete(props){
 
     const handleButtonClick = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:8080/notes/delete/${ID}`, {
+        fetch(`https://mern-to-do-backend.onrender.com/notes/delete/${ID}`, {
             
         method: "DELETE",
         })
