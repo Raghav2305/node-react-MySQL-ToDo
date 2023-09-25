@@ -4,30 +4,30 @@ import { getNote, getNotes, createNote, deleteNote } from "./database.js"
 
 const server = http.createServer(async (req, res) => {
 
-    const allowedOrigins = ["https://mern-to-do-frontend.onrender.com/"]; // Replace with your React app's URL
-
-  // Check if the request origin is in the allowed list
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-    }
-
-  // Set other CORS headers
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-    if (req.method === "OPTIONS") {
-    // Preflight request (OPTIONS), respond with 200 OK
+    const setCorsHeaders = () => {
+        const allowedOrigins = ["https://mern-to-do-frontend.onrender.com"]; 
+        const origin = req.headers.origin;
+        if (allowedOrigins.includes(origin)) {
+          res.setHeader("Access-Control-Allow-Origin", origin);
+        }
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+      };
+    
+      if (req.method === "OPTIONS") {
+        
+        setCorsHeaders();
         res.writeHead(200);
         res.end();
         return;
-    }
+      }
 
 
 
 
     if(req.url === '/'){
         try{
+            setCorsHeaders();
             let allNotes = await getNotes();
             // console.log(allNotes)
 
@@ -47,7 +47,7 @@ const server = http.createServer(async (req, res) => {
     }
     try{
         if (req.url.match(/\/notes\/(\d+)/)) {
-
+            setCorsHeaders();
             const match = req.url.match(/\/notes\/(\d+)/);
             console.log("URL:", req.url);
 
@@ -89,6 +89,7 @@ const server = http.createServer(async (req, res) => {
     if(req.url.match(/\/notes\/create\?title=([^&]+)&contents=([^&]+)/
     )){
         try{
+            setCorsHeaders();
             const Creatematch = req.url.match(/\/notes\/create\?title=([^&]+)&contents=([^&]+)/
             )
             console.log(Creatematch);
@@ -110,6 +111,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.url.match(/\/notes\/delete\/(\d+)/)){
+        setCorsHeaders();
         const delete_url = req.url.match(/\/notes\/delete\/(\d+)/);
         const delete_id = delete_url[1];
 
